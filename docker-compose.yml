@@ -1,0 +1,67 @@
+# v2 sintax
+version: '2'
+
+# Named volumes
+volumes:
+  # MySQL Data
+  l5dbeka-mysql-data:
+    driver: local
+
+  # Postgres Data
+  l5dbeka-postgres-data:
+    driver: local
+
+  # Redis Data
+  l5dbeka-redis-data:
+    driver: local
+
+services:
+  # Postgres (9.5)
+  postgres:
+    image: ambientum/postgres:9.5
+    container_name: l5dbeka-postgres
+    volumes:
+      - l5dbeka-postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=l5dbeka
+      - POSTGRES_DB=l5dbeka
+      - POSTGRES_USER=l5dbeka
+
+  # MySQL (5.7)
+  mysql:
+    image: ambientum/mysql:5.7
+    container_name: l5dbeka-mysql
+    volumes:
+      - l5dbeka-mysql-data:/var/lib/mysql
+    ports:
+      - "33060:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=l5dbeka
+      - MYSQL_DATABASE=l5dbeka
+      - MYSQL_USER=l5dbeka
+      - MYSQL_PASSWORD=l5dbeka
+
+  # Redis
+  cache:
+    image: ambientum/redis:3.2
+    container_name: l5dbeka-redis
+    command: --appendonly yes
+    volumes:
+      - l5dbeka-redis-data:/data
+    ports:
+      - "6380:6379"
+
+  # PHP (with Nginx)
+  app:
+    image: ambientum/php:7.0-nginx
+    container_name: l5dbeka-app
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "8001:8080"
+    links:
+      - mysql
+      - postgres
+      - cache
