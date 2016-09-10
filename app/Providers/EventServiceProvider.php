@@ -27,6 +27,9 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        $events->listen('illuminate.query', function($query, $bindings, $time, $connectionName) {
+            $fullQuery = vsprintf(str_replace(array('%', '?'), array('%%', '%s'), $query), $bindings);
+            \Log::info("${connectionName} | ${time}ms | ${fullQuery}" . PHP_EOL);
+        });
     }
 }

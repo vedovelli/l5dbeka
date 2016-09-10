@@ -9,6 +9,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $connection = 'sqlite';
+
     /**
      * The attributes that are mass assignable.
      *
