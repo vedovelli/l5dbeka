@@ -179,6 +179,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
+        Daavelar\RevengeDb\Providers\RevengeDbServiceProvider::class,
+        Spiritix\LadaCache\LadaCacheServiceProvider::class,
 
     ],
 

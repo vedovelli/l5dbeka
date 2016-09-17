@@ -2,9 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Example extends Model
+class Example extends BaseModel
 {
     protected $connection = 'pgsql';
+    protected $table = 'customer';
 }

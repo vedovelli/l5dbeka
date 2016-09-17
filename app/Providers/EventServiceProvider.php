@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Storage;
+use Illuminate\Support\Facades\DB;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,9 +29,15 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        // $events->listen('illuminate.query', function($query, $bindings, $time, $connectionName) {
-        //     $fullQuery = vsprintf(str_replace(array('%', '?'), array('%%', '%s'), $query), $bindings);
-        //     \Log::info("${connectionName} | ${time}ms | ${fullQuery}" . PHP_EOL);
-        // });
+        DB::listen(function ($query) {
+            $fullQuery = vsprintf(str_replace(array('%', '?'), array('%%', '%s'), $query->sql), $query->bindings);
+
+            $logString = "Connection: {$query->connectionName}
+Execution time: {$query->time}ms
+Query: ${fullQuery}
+---------------------" . PHP_EOL;
+
+            Storage::append('logs/queries.log', $logString);
+        });
     }
 }
