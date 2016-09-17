@@ -11,6 +11,9 @@ Route::group(['prefix' => 'relationships'], function () {
     Route::get('one-to-many',
         ['as' => 'one.to.many', 'uses' => 'RelationshipController@oneToMany']);
 
+    Route::post('one-to-many',
+        ['as' => 'one.to.many.post', 'uses' => 'RelationshipController@oneToManyPost']);
+
     Route::get('many-to-many',
         ['as' => 'many.to.many', 'uses' => 'RelationshipController@manyToMany']);
 });

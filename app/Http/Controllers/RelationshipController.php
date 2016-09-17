@@ -7,11 +7,11 @@ use App\Http\Requests;
 use App\Customer;
 use App\Address;
 use App\Telephone;
+use App\Tag;
 // use App\Employee;
 // use App\Salary;
 // use App\User;
 // use App\CustomerTag;
-// use App\Tag;
 
 class RelationshipController extends Controller
 {
@@ -35,9 +35,9 @@ class RelationshipController extends Controller
     public function oneToMany()
     {
         $title = 'One To Many';
-        $route='';
-        $collection = Telephone::with('customer')->where('id', 1)->get();
-        // $collection = Customer::with('address')->get();
+        $route='one.to.many.post';
+        // $collection = Telephone::with('customer')->where('id', 1)->get();
+        $collection = Customer::with(['address', 'telephones'])->get();
 
         // $collection->load(['telephones' => function ($query) {
         //     $query->where('type', 'mobile');
@@ -46,11 +46,32 @@ class RelationshipController extends Controller
         return $this->view(compact('collection', 'title', 'route'));
     }
 
+    public function oneToManyPost()
+    {
+        $customer = Customer::first();
+
+        $telephone = new Telephone();
+        $telephone->number = '342183901823901';
+        $telephone->type = 'land';
+
+        $customer->telephones()->save($telephone);
+
+        return redirect()->back();
+    }
+
     public function manyToMany()
     {
         $title = 'Many To Many';
         $route = '';
-        $collection = collect([]);
+
+        // $collection = Tag::find(5);
+
+        // $collection->load('customers');
+
+        $collection = Customer::with(['tags' => function ($query) {
+            $query->distinct();
+        }])->get();
+
         return $this->view(compact('collection', 'title', 'route'));
     }
 }

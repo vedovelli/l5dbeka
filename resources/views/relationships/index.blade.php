@@ -32,7 +32,7 @@
             {{-- @foreach($collection as $customer)
                 <p>{{ $customer->address->street }}</p>
             @endforeach --}}
-            {{ var_dump($collection->toArray()) }}
+            {{ var_dump($collection->toArray()[0]) }}
         </div>
     </div>
 </body>
