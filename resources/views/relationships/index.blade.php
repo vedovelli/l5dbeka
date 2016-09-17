@@ -29,6 +29,9 @@
             </div>
         </h3>
         <div class="well">
+            {{-- @foreach($collection as $customer)
+                <p>{{ $customer->address->street }}</p>
+            @endforeach --}}
             {{ var_dump($collection->toArray()) }}
         </div>
     </div>

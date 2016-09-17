@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-// use App\Customer;
+use App\Customer;
+use App\Address;
+use App\Telephone;
 // use App\Employee;
 // use App\Salary;
 // use App\User;
-// use App\Address;
-// use App\Telephone;
 // use App\CustomerTag;
 // use App\Tag;
 
@@ -23,7 +23,12 @@ class RelationshipController extends Controller
     {
         $title = 'One To One';
         $route='';
-        $collection = collect([]);
+        $collection = Customer::with('address')->get();
+
+        // if (true) {
+        //     $collection->load('address');
+        // }
+
         return $this->view(compact('collection', 'title', 'route'));
     }
 
@@ -31,7 +36,13 @@ class RelationshipController extends Controller
     {
         $title = 'One To Many';
         $route='';
-        $collection = collect([]);
+        $collection = Telephone::with('customer')->where('id', 1)->get();
+        // $collection = Customer::with('address')->get();
+
+        // $collection->load(['telephones' => function ($query) {
+        //     $query->where('type', 'mobile');
+        // }]);
+
         return $this->view(compact('collection', 'title', 'route'));
     }
 
