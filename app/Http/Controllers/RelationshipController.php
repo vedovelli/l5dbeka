@@ -37,11 +37,12 @@ class RelationshipController extends Controller
         $title = 'One To Many';
         $route='one.to.many.post';
         // $collection = Telephone::with('customer')->where('id', 1)->get();
-        $collection = Customer::with(['address', 'telephones'])->get();
+        $collection = Customer::with('address')->get();
 
-        // $collection->load(['telephones' => function ($query) {
-        //     $query->where('type', 'mobile');
-        // }]);
+        $collection->load(['telephones' => function ($query) {
+            $query->where('number', 'like', '%34218%');
+            // $query->where('type', 'mobile');
+        }]);
 
         return $this->view(compact('collection', 'title', 'route'));
     }
