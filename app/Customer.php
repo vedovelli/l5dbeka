@@ -6,11 +6,6 @@ class Customer extends BaseModel
 {
     protected $connection = 'pgsql';
 
-    public function comments()
-    {
-        return $this->morphMany(Comment::class, 'commentable');
-    }
-
     public function country()
     {
         return $this->belongsTo(Country::class);

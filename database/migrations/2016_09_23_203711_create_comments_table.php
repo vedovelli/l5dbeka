@@ -13,7 +13,7 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::connection('pgsql')->create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('body');
             $table->integer('commentable_id')->unsigned();
@@ -29,6 +29,6 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::connection('pgsql')->dropIfExists('comments');
     }
 }
