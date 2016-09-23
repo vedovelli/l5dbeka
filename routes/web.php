@@ -16,6 +16,9 @@ Route::group(['prefix' => 'relationships'], function () {
 
     Route::get('many-to-many',
         ['as' => 'many.to.many', 'uses' => 'RelationshipController@manyToMany']);
+
+    Route::get('has-many-through',
+        ['as' => 'has.many.through', 'uses' => 'RelationshipController@hasManyThrough']);
 });
 
 

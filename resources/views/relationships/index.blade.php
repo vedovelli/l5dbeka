@@ -10,7 +10,7 @@
         <p style="margin-top: 20px;"><a href="{{ route('one.to.one') }}">One to One</a> |
             <a href="{{ route('one.to.many') }}">One to Many</a> |
             <a href="{{ route('many.to.many') }}">Many to Many</a> |
-            Has Many Through |
+            <a href="{{ route('has.many.through') }}">Has Many Through</a> |
             Polymorphic</p>
         <h1>L5DBEK-A: Relationships</h1>
         <h3>
@@ -32,7 +32,7 @@
             {{-- @foreach($collection as $customer)
                 <p>{{ $customer->address->street }}</p>
             @endforeach --}}
-            {{ var_dump($collection->toArray()[0]) }}
+            {{ var_dump($collection->toArray()) }}
         </div>
     </div>
 </body>

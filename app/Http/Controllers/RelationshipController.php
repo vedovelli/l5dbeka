@@ -75,4 +75,12 @@ class RelationshipController extends Controller
 
         return $this->view(compact('collection', 'title', 'route'));
     }
+
+    public function hasManyThrough()
+    {
+        $title = 'Has Many Through';
+        $route = '';
+        $collection = collect([]);
+        return $this->view(compact('collection', 'title', 'route'));
+    }
 }
