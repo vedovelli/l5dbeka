@@ -11,7 +11,7 @@
             <a href="{{ route('one.to.many') }}">One to Many</a> |
             <a href="{{ route('many.to.many') }}">Many to Many</a> |
             <a href="{{ route('has.many.through') }}">Has Many Through</a> |
-            Polymorphic</p>
+            <a href="{{ route('polymorphic') }}">Polymorphic</a></p>
         <h1>L5DBEK-A: Relationships</h1>
         <h3>
             <div class="row">

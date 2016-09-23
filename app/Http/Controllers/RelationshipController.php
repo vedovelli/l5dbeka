@@ -8,10 +8,7 @@ use App\Customer;
 use App\Address;
 use App\Telephone;
 use App\Tag;
-// use App\Employee;
-// use App\Salary;
-// use App\User;
-// use App\CustomerTag;
+use App\User;
 
 class RelationshipController extends Controller
 {
@@ -79,6 +76,14 @@ class RelationshipController extends Controller
     public function hasManyThrough()
     {
         $title = 'Has Many Through';
+        $route = '';
+        $collection = collect([]);
+        return $this->view(compact('collection', 'title', 'route'));
+    }
+
+    public function polymorphic()
+    {
+        $title = 'Polymorphic';
         $route = '';
         $collection = collect([]);
         return $this->view(compact('collection', 'title', 'route'));

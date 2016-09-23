@@ -9,7 +9,12 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $connection = 'sqlite';
+    protected $connection = 'pgsql';
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 
     /**
      * The attributes that are mass assignable.

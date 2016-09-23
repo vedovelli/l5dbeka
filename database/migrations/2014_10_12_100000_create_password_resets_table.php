@@ -13,7 +13,7 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('sqlite')->create('password_resets', function (Blueprint $table) {
+        Schema::connection('pgsql')->create('password_resets', function (Blueprint $table) {
             $table->string('email')->index();
             $table->string('token')->index();
             $table->timestamp('created_at')->nullable();
@@ -27,6 +27,6 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-        Schema::connection('sqlite')->drop('password_resets');
+        Schema::connection('pgsql')->drop('password_resets');
     }
 }

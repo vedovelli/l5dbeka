@@ -13,6 +13,6 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::connection('sqlite')->table('users')->truncate();
-        factory(User::class, 200)->create();
+        factory(User::class, 20)->create();
     }
 }

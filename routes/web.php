@@ -19,6 +19,9 @@ Route::group(['prefix' => 'relationships'], function () {
 
     Route::get('has-many-through',
         ['as' => 'has.many.through', 'uses' => 'RelationshipController@hasManyThrough']);
+
+    Route::get('polymorphic',
+        ['as' => 'polymorphic', 'uses' => 'RelationshipController@polymorphic']);
 });
 
 
