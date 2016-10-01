@@ -24,13 +24,21 @@ class RelationshipController extends Controller
     {
         $title = 'One To One';
         $route='one.to.one.insert';
-        $collection = Customer::with('address')->get();
+        $collection = Customer::withTrashed()->with('address')->get();
 
         // if (true) {
         //     $collection->load('address');
         // }
 
-        return $this->view(compact('collection', 'title', 'route'));
+        return view('relationships.one-to-one')
+            ->with(compact('collection', 'title', 'route'));
+    }
+
+    public function oneToOneDelete($id)
+    {
+        $customer = Customer::find($id);
+        $customer->delete();
+        return redirect()->route('one.to.one');
     }
 
     public function oneToOneInsert()

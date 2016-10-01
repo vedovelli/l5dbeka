@@ -8,6 +8,8 @@ Route::group(['prefix' => 'relationships'], function () {
 
     Route::get('one-to-one',
         ['as' => 'one.to.one', 'uses' => 'RelationshipController@oneToOne']);
+    Route::get('one-to-one-del/{id}',
+        ['as' => 'one.to.one.delete', 'uses' => 'RelationshipController@oneToOneDelete']);
     Route::post('one-to-one',
         ['as' => 'one.to.one.insert', 'uses' => 'RelationshipController@oneToOneInsert']);
 

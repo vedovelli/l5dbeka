@@ -2,8 +2,12 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Customer extends BaseModel
 {
+    use SoftDeletes;
+
     protected $connection = 'pgsql';
 
     protected $fillable = ['name', 'email', 'birth_date', 'country_id'];
