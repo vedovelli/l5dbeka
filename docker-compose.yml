@@ -15,6 +15,10 @@ volumes:
   l5dbeka-redis-data:
     driver: local
 
+  # Mongo Data
+  l5dbeka-mongo-data:
+    driver: local
+
 services:
   # Postgres (9.5)
   postgres:
@@ -53,6 +57,16 @@ services:
     ports:
       - "6380:6379"
 
+  # MongoDB
+  mongo:
+    image: mongo:3.2
+    container_name: l5dbeka-mongo
+    volumes:
+      - l5dbeka-mongo-data:/data/db1
+    command: --smallfiles
+    ports:
+      - "27018:27017"
+
   # PHP (with Nginx)
   app:
     image: ambientum/php:7.0-nginx
@@ -65,3 +79,4 @@ services:
       - mysql
       - postgres
       - cache
+      - mongo

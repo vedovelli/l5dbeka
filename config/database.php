@@ -79,6 +79,18 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => 'mongo',
+            'port'     => 27017,
+            'database' => 'l5dbeka',
+            'username' => '',
+            'password' => '',
+            'options' => [
+                'database' => 'admin'
+            ]
+        ],
+
     ],
 
     /*

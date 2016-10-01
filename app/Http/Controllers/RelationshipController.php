@@ -19,7 +19,7 @@ class RelationshipController extends Controller
     public function oneToOne()
     {
         $title = 'One To One';
-        $route='';
+        $route='one.to.one.insert';
         $collection = Customer::with('address')->get();
 
         // if (true) {
@@ -27,6 +27,28 @@ class RelationshipController extends Controller
         // }
 
         return $this->view(compact('collection', 'title', 'route'));
+    }
+
+    public function oneToOneInsert()
+    {
+        $data = [
+            'name' => 'Nome do fulano',
+            'email' => 'nome@fulano.com.br',
+            'birth_date' => '1988-01-01',
+            'country_id' => 3,
+        ];
+        $customer = Customer::create($data);
+
+        $data = [
+            'number' => '(11) 3445-0987',
+            'type' => 'land',
+        ];
+
+        $customer->telephones()->create($data);
+
+        $customer->load('telephones');
+
+        return redirect()->route('one.to.one');
     }
 
     public function oneToMany()
@@ -60,7 +82,7 @@ class RelationshipController extends Controller
     public function manyToMany()
     {
         $title = 'Many To Many';
-        $route = '';
+        $route = 'many.to.many.insert';
 
         // $collection = Tag::find(5);
 
@@ -68,9 +90,21 @@ class RelationshipController extends Controller
 
         $collection = Customer::with(['tags' => function ($query) {
             $query->distinct();
-        }])->get();
+        }])->first();
 
         return $this->view(compact('collection', 'title', 'route'));
+    }
+
+    public function manyToManyInsert()
+    {
+        $tag = new Tag();
+        $tag->name = 'Popular';
+        $tag->save();
+
+        $customer = Customer::with('tags')->find(3);
+        $customer->tags()->attach($tag);
+
+        return redirect()->route('many.to.many');
     }
 
     public function hasManyThrough()

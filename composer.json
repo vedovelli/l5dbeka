@@ -10,7 +10,8 @@
         "barryvdh/laravel-debugbar": "^2.2",
         "daavelar/revengedb": "^3.0",
         "predis/predis": "^1.1",
-        "spiritix/lada-cache": "^1.2"
+        "spiritix/lada-cache": "^1.2",
+        "jenssegers/mongodb": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

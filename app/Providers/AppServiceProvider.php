@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Observers\CustomerObserver;
+use App\Customer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Customer::observe(CustomerObserver::class);
+        // Customer::created(function ($customer) {
+        //     dd($customer->toArray());
+        // });
     }
 
     /**

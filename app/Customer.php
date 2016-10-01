@@ -6,6 +6,8 @@ class Customer extends BaseModel
 {
     protected $connection = 'pgsql';
 
+    protected $fillable = ['name', 'email', 'birth_date', 'country_id'];
+
     public function country()
     {
         return $this->belongsTo(Country::class);

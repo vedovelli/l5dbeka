@@ -181,6 +181,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Daavelar\RevengeDb\Providers\RevengeDbServiceProvider::class,
         Spiritix\LadaCache\LadaCacheServiceProvider::class,
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
 
     ],
 
