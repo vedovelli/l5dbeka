@@ -7,8 +7,12 @@ use App\Http\Requests;
 use App\Customer;
 use App\Address;
 use App\Telephone;
+use App\Country;
 use App\Tag;
 use App\User;
+use App\Post;
+use App\Video;
+use App\Comment;
 
 class RelationshipController extends Controller
 {
@@ -111,7 +115,7 @@ class RelationshipController extends Controller
     {
         $title = 'Has Many Through';
         $route = '';
-        $collection = collect([]);
+        $collection = Country::with('telephones')->first();
         return $this->view(compact('collection', 'title', 'route'));
     }
 
@@ -119,7 +123,7 @@ class RelationshipController extends Controller
     {
         $title = 'Polymorphic';
         $route = '';
-        $collection = collect([]);
+        $collection = Video::with('comments')->find(10);
         return $this->view(compact('collection', 'title', 'route'));
     }
 }

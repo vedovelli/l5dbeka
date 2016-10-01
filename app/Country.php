@@ -10,4 +10,9 @@ class Country extends BaseModel
     {
         return $this->hasMany(Customer::class);
     }
+
+    public function telephones()
+    {
+        return $this->hasManyThrough(Telephone::class, Customer::class);
+    }
 }
