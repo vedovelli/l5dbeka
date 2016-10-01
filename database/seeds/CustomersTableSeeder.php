@@ -15,10 +15,6 @@ class CustomersTableSeeder extends Seeder
      */
     public function run()
     {
-        Customer::truncate();
-        Address::truncate();
-        Telephone::truncate();
-
         factory(Customer::class, 20)->create()->each(function ($customer) {
             $address = factory(Address::class)->make();
             $customer->address()->save($address);

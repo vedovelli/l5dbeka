@@ -43,7 +43,7 @@
                     <tr>
                         <td>{{ $c->name }}</td>
                         <td>{{ $c->email }}</td>
-                        <td>{{ $c->birth_date }}</td>
+                        <td>{{ $c->birth_date->diffForHumans() }}</td>
                         <td>
                             @if(!$c->trashed())
                             <a href="{{ route('one.to.one.delete', $c->id) }}" class="btn btn-danger btn-xs">excluir</a>

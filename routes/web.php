@@ -1,5 +1,7 @@
 <?php
 
+Route::get('html-select', ['as' => 'html.select', 'uses' => 'RelationshipController@htmlSelectData']);
+
 Route::group(['prefix' => 'relationships'], function () {
 
     Route::get('', function () {

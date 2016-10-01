@@ -13,6 +13,7 @@ use App\User;
 use App\Post;
 use App\Video;
 use App\Comment;
+use App\Scopes\OrgScope;
 
 class RelationshipController extends Controller
 {
@@ -20,11 +21,28 @@ class RelationshipController extends Controller
         return view('relationships.index')->with($variables);
     }
 
+    public function htmlSelectData()
+    {
+        $collection = Customer::withTrashed()->with('address')->get();
+
+        $output = $collection->reduce(function ($source, $item) {
+            $source[$item['email']] = $item->toArray();
+            return $source;
+        }, []);
+
+        dd($output);
+    }
+
     public function oneToOne()
     {
         $title = 'One To One';
         $route='one.to.one.insert';
-        $collection = Customer::withTrashed()->with('address')->get();
+        $collection = Customer::withTrashed()
+            // ->org()
+            // ->where('email', 'like', '%example.org')
+            ->withoutGlobalScope(OrgScope::class)
+            ->with('address')
+            ->get();
 
         // if (true) {
         //     $collection->load('address');
