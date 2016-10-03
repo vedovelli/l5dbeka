@@ -29,15 +29,18 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        DB::listen(function ($query) {
-            $fullQuery = vsprintf(str_replace(array('%', '?'), array('%%', '%s'), $query->sql), $query->bindings);
+        if (env('APP_DEBUG')) {
+            DB::listen(function ($query) {
+                $fullQuery = vsprintf(str_replace(array('%', '?'), array('%%', '%s'), $query->sql), $query->bindings);
 
-            $logString = "Connection: {$query->connectionName}
-Execution time: {$query->time}ms
-Query: ${fullQuery}
----------------------" . PHP_EOL;
+                $logString = "Connection: {$query->connectionName}
+    Execution time: {$query->time}ms
+    Query: ${fullQuery}
+    ---------------------" . PHP_EOL;
 
-            Storage::append('logs/queries.log', $logString);
-        });
+                Storage::append('logs/queries.log', $logString);
+            });
+        }
+
     }
 }
