@@ -38,6 +38,9 @@ class EventServiceProvider extends ServiceProvider
     Query: ${fullQuery}
     ---------------------" . PHP_EOL;
 
+                /**
+                * Use no Terminal `tail -f storage/app/logs/queries.log`
+                */
                 Storage::append('logs/queries.log', $logString);
             });
         }
